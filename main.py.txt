@@ -1,0 +1,198 @@
+# User Interface
+def main():
+    while True:
+        print("\nWelcome to the Encryption/Decryption Tool!")
+        print("\nAvailable Ciphers:")
+        print("1. Additive Cipher")
+        print("2. Multiplicative Cipher")
+        print("3. Affine Cipher")
+        print("4. Monoalphabetic Substitution Cipher")
+        print("5. Autokey Cipher")
+        print("6. Playfair Cipher")
+        print("7. Vigenère Cipher")
+        print("8. Keyless Transposition Cipher")
+        print("9. Keyed Transposition Cipher")
+        print("10. Combination of Keyless and Keyed Transposition")
+        print("11. Double Transposition Cipher")
+        print("12. Quit")
+
+        try:
+            choice = int(
+                input(
+                    "Enter the number of the cipher you want to use (or 12 to Quit): "
+                ))
+            if choice == 12:
+                print("Thank you for using the tool. Goodbye!")
+                break
+
+            plaintext = input("Enter the plaintext: ")
+
+            if choice == 1:
+                try:
+                    key = int(input("Enter the key (integer): "))
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              additive_cipher_encrypt(plaintext, key))
+                    else:
+                        print("Plaintext:",
+                              additive_cipher_decrypt(plaintext, key))
+                except ValueError:
+                    print("Invalid key. Please enter an integer.")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 2:
+                try:
+                    key = int(input("Enter the key (integer): "))
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              multiplicative_cipher_encrypt(plaintext, key))
+                    else:
+                        print("Plaintext:",
+                              multiplicative_cipher_decrypt(plaintext, key))
+                except ValueError:
+                    print("Invalid key. Please enter an integer.")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 3:
+                try:
+                    a = int(input("Enter the first key (a): "))
+                    b = int(input("Enter the second key (b): "))
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              affine_cipher_encrypt(plaintext, a, b))
+                    else:
+                        print("Plaintext:",
+                              affine_cipher_decrypt(plaintext, a, b))
+                except ValueError:
+                    print("Invalid keys. Please enter integers.")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 4:
+                try:
+                    substitution_key = input("Enter the 26-letter substitution key (e.g., 'bcdefghijklmnopqrstuvwxyza'): ").lower()
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print(
+                            "Ciphertext:",
+                            monoalphabetic_substitution_encrypt(
+                                plaintext, substitution_key))
+                    else:
+                        print(
+                            "Plaintext:",
+                            monoalphabetic_substitution_decrypt(
+                                plaintext, substitution_key))
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 5:
+                keyword = input("Enter the keyword: ").upper()
+                if not keyword.isalpha():
+                    print(
+                        "Invalid keyword. Please enter only alphabetic characters."
+                    )
+                    continue
+                try:
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              autokey_cipher_encrypt(plaintext, keyword))
+                    else:
+                        print("Plaintext:",
+                              autokey_cipher_decrypt(plaintext, keyword))
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 6:
+                keyword = input(
+                    "Enter the keyword (only alphabetic characters): ").upper(
+                    )
+                if not keyword.isalpha():
+                    print(
+                        "Invalid keyword. Please enter only alphabetic characters."
+                    )
+                    continue
+                try:
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              playfair_cipher_encrypt(plaintext, keyword))
+                    else:
+                        print("Plaintext:",
+                              playfair_cipher_decrypt(plaintext, keyword))
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 7:
+                keyword = input(
+                    "Enter the keyword (only alphabetic characters): ").upper(
+                    )
+                if not keyword.isalpha():
+                    print(
+                        "Invalid keyword. Please enter only alphabetic characters."
+                    )
+                    continue
+                try:
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              vigenere_cipher_encrypt(plaintext, keyword))
+                    else:
+                        print("Plaintext:",
+                              vigenere_cipher_decrypt(plaintext, keyword))
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 8:
+                try:
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:",
+                              keyless_transposition_encrypt(plaintext))
+                    else:
+                        print("Plaintext:",
+                              keyless_transposition_decrypt(plaintext))
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+            elif choice == 9:
+                key = input("Enter the key for transposition (string): ")
+                mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                if mode == "E":
+                    print("Ciphertext:", keyed_transposition_encrypt(plaintext, key))
+                else:
+                    print("Plaintext:", keyed_transposition_decrypt(plaintext, key))
+
+            elif choice == 10:
+                key = input("Enter the key for combined transposition (string): ")
+                mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                if mode == "E":
+                    print("Ciphertext:", combined_transposition_encrypt(plaintext, key))
+                else:
+                    print("Plaintext:", combined_transposition_decrypt(plaintext, key))
+            elif choice == 11:
+                try:
+                    key1 = input("Enter the first key for double transposition (string): ")
+                    key2 = input("Enter the second key for double transposition (string): ")
+                    mode = input("Encrypt (E) or Decrypt (D)? ").upper()
+                    if mode == "E":
+                        print("Ciphertext:", double_transposition_encrypt(plaintext, key1, key2))
+                    elif mode == "D":
+                        print("Plaintext:", double_transposition_decrypt(plaintext, key1, key2))
+                    else:
+                        print("Invalid mode. Please enter 'E' for Encrypt or 'D' for Decrypt.")
+                except ValueError:
+                    print("Invalid input. Please enter strings for keys.")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+
+main()
